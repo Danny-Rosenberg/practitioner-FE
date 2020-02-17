@@ -22,7 +22,6 @@ class Home extends Component {
 					<div className='row'>
 						<div className='col s6'>
 							<p>My therapy center is located at the border of Wellesley and Newton on Washington Ave.</p>
-							<p>hello world:{process.env.REACT_MAP_EMBED_API_KEY}</p>
 						</div>
 						<div className='col s6'>
 							<IframeMap />
