@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import TodaysList from './components/todaysList';
-import LongtermList from './components/longtermList';
+import Home from './components/Home';
 import Navbar from './components/Navbar';
 import About from './components/About';
 import Contact from './components/Contact';
@@ -14,7 +13,7 @@ class App extends Component {
 			<BrowserRouter>
 				<div className="App">
 					<Navbar />
-					<Route exact path='/' component={TodaysList} />
+					<Route exact path='/' component={Home} />
 					<Route path='/contact' component={Contact} />
 					<Route path='/about' component={About} />
 					

@@ -34,7 +34,7 @@ class Contact extends Component {
 
 	render(){
 		return(
-			<div className='aboutText'>
+			<div className='contactForm'>
 				<h4 className='indigo lighten-2'>Get in Touch with Marilyn</h4>
 				<br></br>
 				<p>Want to start the conversation? Fill in your contact information below.</p>
