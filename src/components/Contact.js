@@ -1,17 +1,19 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 
 class Contact extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			fullName: '',
-			email: '',
-			phone: '',
-			age: ''
+			fullName: 'A',
+			email: 'B',
+			phone: 'C',
+			age: '10'
 		};
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.contactPost  = this.contactPost.bind(this);
 	}
 
 
@@ -22,6 +24,27 @@ class Contact extends Component {
 		
 		this.setState({
 			[name]: value
+		});
+	}
+
+
+	contactPost(event) {
+		/*
+		for (var pair of bodyFormData.entries()) {
+			console.log(pair[0]+ ': ' + pair[1]); 
+		}*/
+
+		axios.post('http://localhost:8000/contact', {
+			fullName: this.state.fullName,
+			email: this.state.email,
+			phone: this.state.phone,
+			age: this.state.age
+		})
+		.then(function (response) {
+			console.log('success: ' + response);
+		})
+		.catch(function (response) {
+			console.log('failure: ' + response);
 		});
 	}
 
@@ -83,7 +106,9 @@ class Contact extends Component {
 								</div>
 							</form>
 					<br></br>
-					<button className="btn waves-effect waves-light indigo-lighten-2" type="submit">Send</button>
+						<div>
+							<button className="btn waves-effect waves-light indigo-lighten-2" type="submit" onClick={this.contactPost}>send</button>
+						</div>
 					</div>
 				</div>
 			</div>
