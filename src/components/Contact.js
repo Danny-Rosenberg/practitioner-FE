@@ -5,15 +5,18 @@ class Contact extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			fullName: 'A',
+			firstName: 'A',
+			lastName: 'Z',
 			email: 'B',
-			phone: 'C',
-			age: '10'
+			phoneNumber: 'C',
+			age: '10',
+			postSuccessful: false,
 		};
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.contactPost  = this.contactPost.bind(this);
+		this.handleFormError = this.handleFormError.bind(this);
 	}
 
 
@@ -28,6 +31,13 @@ class Contact extends Component {
 	}
 
 
+	handleFormError(error) {
+	  this.setState({
+			[error.param]: error.msg
+		});
+	}
+
+
 	contactPost(event) {
 		/*
 		for (var pair of bodyFormData.entries()) {
@@ -35,17 +45,22 @@ class Contact extends Component {
 		}*/
 
 		axios.post('http://localhost:8000/contact', {
-			fullName: this.state.fullName,
+			firstName: this.state.firstName,
+			lastName: this.state.lastName,
 			email: this.state.email,
-			phone: this.state.phone,
+			phoneNumber: this.state.phoneNumber,
 			age: this.state.age
 		})
-		.then(function (response) {
+		.then((response) => {
 			console.log('success: ' + response);
+			this.setState({
+				postSuccessful: true
+			})
 		})
 		.catch(function (response) {
 			console.log('failure: ' + response);
-		});
+			response.response.data.errors.forEach(this.handleFormError);
+		}.bind(this))
 	}
 
 
@@ -65,15 +80,26 @@ class Contact extends Component {
 							<form onSubmit={this.handleSubmit}>
 								<div className='input field col s6'>
 									<label>
-										Enter your full name:
+										Enter your first name:
 										<input
-											placeholder='Your Name'
-											name='fullName'
+											placeholder='Your First Name'
+											name='firstName'
 											type='text'
-											value={this.state.fullName}
+											value={this.state.firstName}
 											onChange={this.handleChange} />
 									</label>
 								</div>
+								<div className='input field col s6'>
+                  <label>
+                    Enter your last name:
+                    <input
+                      placeholder='Your Last Name'
+                      name='lastName'
+                      type='text'
+                      value={this.state.lastName}
+                      onChange={this.handleChange} />
+                  </label>
+                </div>
 								<div className='input field col s6'>
 									<label>
 										Enter your email address:
@@ -88,9 +114,9 @@ class Contact extends Component {
 									<label>
 										Enter your phone number:
 										<input
-											name='phone'
+											name='phoneNumber'
 											type='text'
-											value={this.state.phone}
+											value={this.state.phoneNumber}
 											onChange={this.handleChange} />
 									</label>
 								</div>
