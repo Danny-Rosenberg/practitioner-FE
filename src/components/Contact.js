@@ -52,15 +52,15 @@ class Contact extends Component {
 			age: this.state.age
 		})
 		.then((response) => {
-			console.log('success: ' + response);
+			console.log('success: ' + response.data);
 			this.setState({
 				postSuccessful: true
 			})
 		})
-		.catch(function (response) {
+		.catch((response) => {
 			console.log('failure: ' + response);
 			response.response.data.errors.forEach(this.handleFormError);
-		}.bind(this))
+		})
 	}
 
 
