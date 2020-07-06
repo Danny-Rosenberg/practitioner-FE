@@ -7,13 +7,15 @@ class LogIn extends Component {
 		this.state = {
 			email: 'peach@aol.com',
 			password: 'peach',
-			postStatus: 'unstarted'
+			postStatus: 'unstarted',
+			instructionText: "Sign in to your admin account"
 		}
 
 		this.handleChange    = this.handleChange.bind(this);
     this.handleSubmit 	 = this.handleSubmit.bind(this);
     this.loginPost       = this.loginPost.bind(this);
-    this.handleFormError = this.handleFormError.bind(this);
+		this.handleSuccess   = this.handleSuccess.bind(this);
+		this.handleFailure   = this.handleFailure.bind(this);
 	}
 
 	handleChange(event) {
@@ -27,25 +29,27 @@ class LogIn extends Component {
   }
 
 
-	handleFormError(error) {
-    this.setState({
-      [error.param]: error.msg
-    });
-  }
-
-
 	handleSubmit(event) {
     console.log('event submitted value: ' + this.state.values)
     event.preventDefault();
   }
 
 
-	loginPost(event) {
-    /*
-    for (var pair of bodyFormData.entries()) {
-      console.log(pair[0]+ ': ' + pair[1]);
-    }*/
+	//redirect to the Admin's homepage when it exists
+	handleSuccess() {
+		this.props.history.push('/');
+	}
 
+
+	//will this rerender (which is what I want)?
+	handleFailure() {
+	  this.setState({
+			instructionText: 'Log in failed, please try again.'
+		});
+	}
+
+
+	loginPost(event) {
     axios.post('http://localhost:8000/login', {
       email: this.state.email,
       password: this.state.password
@@ -55,13 +59,14 @@ class LogIn extends Component {
       this.setState({
         postStatus: 'successful'
       })
+			this.handleSuccess();
     })
     .catch((response) => {
 			this.setState({
 				postStatus: 'failed'
 			})
+			this.handleFailure();
       console.log('failure: ' + response);
-      response.response.data.errors.forEach(this.handleFormError);
     })
   }
 
@@ -69,14 +74,14 @@ class LogIn extends Component {
 	render() {
 		return(
 			<div className='login'>
-				<h5 className='center'>Practicioner Log in</h5>
+				<h5 className='center'>Practicioner Log In</h5>
 				<div className='card-panel col s6'>
 					<div className='container'>
 						<div className='card-panel col s6'>
-              <p>Sign in to your admin account</p>
+              <p>{this.state.instructionText}</p>
 							<form onSubmit={this.handleSubmit}>
                 <div className='input field col s6'>
-                  <label for='email'>
+                  <label>
                     Enter your email:
                     <input
                       placeholder='Your First Name'
@@ -89,7 +94,7 @@ class LogIn extends Component {
                   </label>
 								</div>
 								<div className='input field col s6'>
-                  <label for='password'>
+                  <label>
                     Enter your email:
                     <input
                       placeholder='Your Password'
