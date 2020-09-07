@@ -74,7 +74,7 @@ class LogIn extends Component {
 	render() {
 		return(
 			<div className='login'>
-				<h5 className='center'>Practicioner Log In</h5>
+				<h5 className='center'>Practitioner Log In</h5>
 				<div className='card-panel col s6'>
 					<div className='container'>
 						<div className='card-panel col s6'>
@@ -95,7 +95,7 @@ class LogIn extends Component {
 								</div>
 								<div className='input field col s6'>
                   <label>
-                    Enter your email:
+                    Enter your password:
                     <input
                       placeholder='Your Password'
                       name='password'

@@ -5,6 +5,7 @@ import Navbar  from './components/Navbar';
 import About   from './components/About';
 import Contact from './components/Contact';
 import LogIn 	 from './components/LogIn';
+import LogOut  from './components/LogOut';
 
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
 					<Route path='/contact' component={Contact} />
 					<Route path='/about' component={About} />
 				  <Route path='/login' component={LogIn} />
+					<Route path='/logout' component={LogOut} />
 				</div>
 			</BrowserRouter>
 		);
