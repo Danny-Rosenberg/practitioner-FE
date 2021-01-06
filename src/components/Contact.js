@@ -73,7 +73,7 @@ class Contact extends Component {
 	render(){
 		return(
 			<div className='contact'>
-				<h4 className='indigo lighten-2'>Get in Touch with Marilyn</h4>
+				<h4 className='indigo lighten-2' style={{'text-align':'center'}}>Get in Touch with Marilyn</h4>
 					<div className='container'>
 						<div className='card-panel col s6'>
 							<p>Want to start the conversation? Fill in your contact information below.</p>
