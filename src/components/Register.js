@@ -136,7 +136,7 @@ class Register extends Component {
 							</form>
 					<br></br>
 						<div>
-							<button className="btn waves-effect waves-light indigo-lighten-2" type="submit" onClick={this.registerPost}>send</button>
+							<button className="btn waves-effect waves-light indigo-lighten-2" type="submit" onClick={this.practitionerPost}>send</button>
 						</div>
 					</div>
 				</div>
