@@ -1,21 +1,21 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-class Contact extends Component {
+class Register extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			firstName: 'A',
 			lastName: 'Z',
-			email: 'a@aol.com',
+			email: 'coolpractitioner@aol.com',
 			phoneNumber: '1234567890',
-			age: '10',
-			postSuccessful: false,
+			yearsExperience: '10',
+			specialty: 'reading'
 		};
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.contactPost  = this.contactPost.bind(this);
+		this.practitionerPost  = this.practitionerPost.bind(this);
 		this.handleFormError = this.handleFormError.bind(this);
 	}
 
@@ -24,7 +24,7 @@ class Contact extends Component {
 		const target = event.target;
 		const value = target.value;
 		const name = target.name;
-		
+
 		this.setState({
 			[name]: value
 		});
@@ -38,24 +38,17 @@ class Contact extends Component {
 	}
 
 
-	contactPost(event) {
-		/*
-		for (var pair of bodyFormData.entries()) {
-			console.log(pair[0]+ ': ' + pair[1]); 
-		}*/
-
-		axios.post('http://localhost:8000/contact', {
+	practitionerPost(event) {
+		axios.post('http://localhost:8000/practitioner', {
 			firstName: this.state.firstName,
 			lastName: this.state.lastName,
 			email: this.state.email,
 			phoneNumber: this.state.phoneNumber,
-			age: this.state.age
+			yearsExperience: this.state.yearsExperience,
+			specialty: this.state.specialty
 		})
 		.then((response) => {
 			console.log('success: ' + response.data);
-			this.setState({
-				postSuccessful: true
-			})
 		})
 		.catch((response) => {
 			console.log('failure: ' + response);
@@ -72,11 +65,11 @@ class Contact extends Component {
 
 	render(){
 		return(
-			<div className='contact'>
-				<h4 className='indigo lighten-2'>Get in Touch with Marilyn</h4>
+			<div className='practitioner'>
+				<h4 className='indigo lighten-2'>Apply to Build Your Page</h4>
 					<div className='container'>
 						<div className='card-panel col s6'>
-							<p>Want to start the conversation? Fill in your contact information below.</p>
+							<p>Tell us about your professional experience</p>
 							<form onSubmit={this.handleSubmit}>
 								<div className='input field col s6'>
 									<label>
@@ -124,16 +117,26 @@ class Contact extends Component {
 									<label>
 										Enter your age:
 										<input
-											name='age'
+											name='yearsExperience'
 											type='number'
-											value={this.state.age}
+											value={this.state.yearsExperience}
+											onChange={this.handleChange} />
+									</label>
+								</div>
+								<div className='input field col s6'>
+									<label>
+										Specialty:
+										<input
+											name='specialty'
+											type='text'
+											value={this.state.specialty}
 											onChange={this.handleChange} />
 									</label>
 								</div>
 							</form>
 					<br></br>
 						<div>
-							<button className="btn waves-effect waves-light indigo-lighten-2" type="submit" onClick={this.contactPost}>send</button>
+							<button className="btn waves-effect waves-light indigo-lighten-2" type="submit" onClick={this.registerPost}>send</button>
 						</div>
 					</div>
 				</div>
@@ -143,4 +146,4 @@ class Contact extends Component {
 }
 
 
-export default Contact;
+export default Register;
