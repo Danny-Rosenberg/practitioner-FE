@@ -115,7 +115,7 @@ class Register extends Component {
 								</div>
 								<div className='input field col s6'>
 									<label>
-										Enter your age:
+										How many years of professional experience do you have?:
 										<input
 											name='yearsExperience'
 											type='number'
