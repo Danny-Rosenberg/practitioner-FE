@@ -1,2 +1,2 @@
-# doctor-profile-basic
-A first swipe at a profile website for a doctor looking for patients.
+# practitioner-FE
+A React frontend for the practitioner banner site.
